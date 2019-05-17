@@ -157,7 +157,7 @@ var shuffleArray = function shuffleArray(arr) {
   return arr;
 };
 
-var WordCloud = function WordCloud(elements, options) {
+var WordCloud = function WordCloud(elements, options, listener) {
   if (!isSupported) {
     return;
   }
@@ -1019,6 +1019,9 @@ var WordCloud = function WordCloud(elements, options) {
   /* Send DOM event to all elements. Will stop sending event and return
       if the previous one is canceled (for cancelable events). */
   var sendEvent = function sendEvent(type, cancelable, details) {
+    if (listener[type]){
+      listener[type](details)
+    }
     if (cancelable) {
       return !elements.some(function(el) {
         var event = new CustomEvent(type, {
@@ -1224,7 +1227,7 @@ var WordCloud = function WordCloud(elements, options) {
 
       var drawn = putWord(putWordParam);
       var canceled = !sendEvent('wordclouddrawn', true, {
-        item: settings.list[i], drawn: drawn });
+        item: settings.list[i], drawn: drawn, max: settings.list.length });
       if (exceedTime() || canceled) {
         stoppingFunction(timer);
         settings.abort();
@@ -1232,6 +1235,10 @@ var WordCloud = function WordCloud(elements, options) {
         sendEvent('wordcloudstop', false);
         removeEventListener('wordcloudstart', anotherWordCloudStart);
         return;
+      } else {
+        if (i === settings.list.length - 1){
+          sendEvent('wordcloudfinish', false);
+        }
       }
       i++;
       timer = loopingFunction(loop, settings.wait);
@@ -1250,13 +1257,3 @@ WordCloud.isSupported = isSupported;
 WordCloud.minFontSize = minFontSize;
 
 export default WordCloud;
-
-// Expose the library as an AMD module
-// if (typeof define === 'function' && define.amd) {
-//   global.WordCloud = WordCloud;
-//   define('wordcloud', [], function() { return WordCloud; });
-// } else if (typeof module !== 'undefined' && module.exports) {
-//   module.exports = WordCloud;
-// } else {
-//   global.WordCloud = WordCloud;
-// }
