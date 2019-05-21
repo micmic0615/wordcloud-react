@@ -1041,6 +1041,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
 
   /* Start drawing on a canvas */
   var start = function start() {
+    let renderedWords = [];
     // For dimensions, clearCanvas etc.,
     // we only care about the first element.
     var canvas = elements[0];
@@ -1226,6 +1227,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
       }
 
       var drawn = putWord(putWordParam);
+      if (drawn){renderedWords.push(putWordParam.item)}
       var canceled = !sendEvent('wordclouddrawn', true, {
         item: settings.list[i], drawn: drawn, max: settings.list.length });
       if (exceedTime() || canceled) {
@@ -1237,7 +1239,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
         return;
       } else {
         if (i === settings.list.length - 1){
-          sendEvent('wordcloudfinish', false);
+          sendEvent('wordcloudfinish', false, renderedWords);
         }
       }
       i++;

@@ -1,6 +1,7 @@
 import WordCloud from 'Src/js/wordcloud2';
 import GenerateConfig from 'Src/js/generateConfig';
 import ReadMask from 'Src/js/readMask';
+import axios from 'axios';
 
 const drawQueue = [];
 
@@ -122,7 +123,10 @@ function drawCanvas(customList) {
             // Order matters here because the HTML canvas might by
             // set to display: none.
             WordCloud([divCanvas, divHtmlCanvas], runConfig, {
-                "wordcloudfinish": ()=>{
+                "wordcloudfinish": async (renderedWords)=>{
+                    await axios.post('http://localhost:4000/check-render', {renderedWords});
+                    window.HAS_RENDERED = true;
+                    // console.log(renderedWords)
                     var pngUrl = divCanvas.toDataURL(); 
                     divImgCanvas.src = String(pngUrl);
                     divCanvas.style.opacity = 0;
