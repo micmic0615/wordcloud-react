@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DrawCanvas from 'Src/js/drawCanvas';
 import axios from 'axios';
+import isMobile from 'is-mobile';
 
 
 class Index extends Component {
@@ -18,13 +19,17 @@ class Index extends Component {
     }
 
     componentDidMount = () => {
-        window.HAS_RENDERED = false;
-        setTimeout(this.fetch, 500)
+        if(isMobile()){
+            this.props.history.push('/form')
+        } else {
+            window.HAS_RENDERED = false;
+            setTimeout(this.fetch, 500)
+        }
     }
 
     fetch = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/fetch');
+            const response = await axios.post('http://107.10.114.154:4000/fetch');
 
             if (!response.data.initialize){
                 if (window.HAS_RENDERED){
