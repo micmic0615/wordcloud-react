@@ -21,8 +21,8 @@ body {
 }
 
 .container {
-    width: 800px;
-    height: 800px;
+    height:95vh;
+    width:95vh;
     overflow-x: auto;
     overflow-y: visible;
     position: relative;

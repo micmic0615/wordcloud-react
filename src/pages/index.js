@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DrawCanvas from 'Src/js/drawCanvas';
+import DrawPing from 'Src/js/drawPing';
 import axios from 'axios';
 import isMobile from 'is-mobile';
 
@@ -13,6 +14,7 @@ class Index extends Component {
         this.wordsRendered = 0;
         this.baseList = null;
         this.replaceList = null;
+        this.changes = [];
 
         // this.runningList = [...this.baseList];
         // this.runningListIndex = 0;
@@ -23,6 +25,7 @@ class Index extends Component {
             this.props.history.push('/form')
         } else {
             window.HAS_RENDERED = false;
+            DrawPing.bind(this)()
             setTimeout(this.fetch, 500)
         }
     }
@@ -52,6 +55,9 @@ class Index extends Component {
 
                 if (JSON.stringify(compareA) !== JSON.stringify(compareB)){
                     DrawCanvas.bind(this)(this.replaceList)
+                    
+                    window.NEW_CHANGES = response.data.changes.filter(p=>!this.changes.includes(p));
+                    this.changes = [...response.data.changes];
                 }
             }
         } catch (error) {
@@ -66,6 +72,7 @@ class Index extends Component {
             <div className="container">
                 <img id="img-canvas" src="" className="canvas" alt=""/>
                 <canvas id="canvas" className="canvas" ></canvas>
+                <canvas id="ping-canvas" className="canvas" ></canvas>
                 <div id="html-canvas" className="canvas hide"></div>
             </div>
         </div>)

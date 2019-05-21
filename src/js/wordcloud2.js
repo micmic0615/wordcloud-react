@@ -784,6 +784,19 @@ var WordCloud = function WordCloud(elements, options, listener) {
         var translateY = (gy + info.gh / 2) * g * mu;
 
         
+
+        if (window.NEW_CHANGES){
+          if (window.NEW_CHANGES.includes(text)){
+            if (!window.PING){window.PING = []};
+            window.PING.push({
+              x: translateX,
+              y: translateY,
+              lifespan: 1,
+              text,
+            })
+          }
+        }
+        
         var moveX = scaleX;
         var adjustX = 0;
         if (moveX !== 1){
@@ -806,8 +819,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
         // Here, we use textBaseline = 'middle' and draw the text at exactly
         // 0.5 * fontSize lower.
         ctx.textBaseline = 'middle';
-        ctx.fillText(text, info.fillTextOffsetX * mu,
-                            (info.fillTextOffsetY + fontSize * 0.5) * mu);
+        ctx.fillText(text, info.fillTextOffsetX * mu, (info.fillTextOffsetY + fontSize * 0.5) * mu);
 
         // The below box is always matches how <span>s are positioned
         /* ctx.strokeRect(info.fillTextOffsetX, info.fillTextOffsetY,
