@@ -124,6 +124,7 @@ function drawCanvas(customList) {
             // set to display: none.
             WordCloud([divCanvas, divHtmlCanvas], runConfig, {
                 "wordcloudfinish": async (renderedWords)=>{
+                    console.log(renderedWords.length, "/" ,runConfig.list.length )
                     await axios.post('http://107.10.114.154:4000/check-render', {renderedWords});
                     window.HAS_RENDERED = true;
                     // console.log(renderedWords)

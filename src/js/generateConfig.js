@@ -7,7 +7,7 @@ function GenerateConfig (currentList) {
         frame: this.baseList,
 
         shuffle: 0,
-        gridSize: Math.round(16 * canvasWidth / 1024),
+        gridSize: Math.round(4 * (800/canvasWidth)),
         fontFamily: "Times, serif",
         rotateRatio: 0.5,
         rotationSteps: 2,
