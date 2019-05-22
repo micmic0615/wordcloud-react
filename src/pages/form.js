@@ -7,7 +7,8 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            word: ""
+            word: "",
+            ratio: 25
         };
     }
 
@@ -17,8 +18,8 @@ class Form extends Component {
 
     submit = async () => {
         try {
-            let { word } = this.state;
-            await axios.post('http://107.10.114.154:4000/update', {word});
+            let { word, ratio } = this.state;
+            await axios.post('http://107.10.114.154:4000/update', {word, ratio});
             this.setState({word: ""}, this.keyboardRef.keyboard.clearInput)
         } catch (error) {
             console.error(error);
@@ -51,6 +52,14 @@ class Form extends Component {
             this.submit()
         } else if (button === "{alt}"){
             this.reset()
+        } else if (button === "{more}"){
+            let ratio = this.state.ratio + 5;
+            if (ratio > 100){ratio = 100}
+            this.setState({ratio})
+        } else if (button === "{less}"){
+            let ratio = this.state.ratio - 5;
+            if (ratio < 0){ratio = 0}
+            this.setState({ratio})
         } else if (button.includes("{") && button.includes("}")) {
             this.handleLayoutChange(button);
         }
@@ -87,7 +96,14 @@ class Form extends Component {
     render() {
         return (<div className="form">
             <div className="form-box">
-                <input className="form-input" value={this.state.word} readonly style={{pointerEvents:"none", width: "100%", boxSizing:"border-box", marginBottom:"10px"}}/>
+                <div className="form-meter">
+                    <div className="form-ratio" style={{width: (this.state.ratio) + "%"}}></div>
+                    <div className="form-ratio-text">{(this.state.ratio) + "%"}</div>
+                </div>
+
+
+                <input className="form-input" value={this.state.word} style={{pointerEvents:"none", width: "100%", boxSizing:"border-box", marginBottom:"10px"}}/>
+
                 <Keyboard 
                     ref={r => this.keyboardRef = r}
                     onChange={input =>this.onKeyChange(input)} 
@@ -100,7 +116,8 @@ class Form extends Component {
                         "a s d f g h j k l -",
                         "{shift} z x c v b n m , .",
                         "{space}",
-                        "{alt} {enter}"
+                        "{alt} {enter}",
+                        "{less} {more}",
                         ],
                         shift: [
                         "! @ # $ % ^ & * ( ) {bksp}",
@@ -108,7 +125,8 @@ class Form extends Component {
                         "A S D F G H J K L _",
                         "{shiftactivated} Z X C V B N M , .",
                         "{space}",
-                        "{alt} {enter}"
+                        "{alt} {enter}",
+                        "{less} {more}",
                         ]
                     }}
                     display= {{
@@ -122,7 +140,9 @@ class Form extends Component {
                         "{downkeyboard}": "🞃",
                         "{space}": " ",
                         "{default}": "ABC",
-                        "{back}": "⇦"
+                        "{back}": "⇦",
+                        "{more}": "% UP",
+                        "{less}": "% DOWN"
                     }}
                 />
                 {/* <button className="form-button" onClick={this.submit}>SUBMIT</button> */}

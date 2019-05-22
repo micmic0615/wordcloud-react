@@ -1,14 +1,16 @@
-function GenerateConfig (currentList) {
+function GenerateConfig (params = {}) {
     var canvasWidth = document.querySelector("#canvas").offsetWidth;
     var bgColor = window.getComputedStyle(document.querySelector('.wrapper'), null).getPropertyValue("background-color");
 
-    return {
-        list: currentList || this.baseList,
+    let returnConfig = {
+        list: this.baseList,
         frame: this.baseList,
 
+        fade: 0,
+
         shuffle: 0,
-        gridSize: Math.round(4 * (800/canvasWidth)),
-        fontFamily: "Times, serif",
+        gridSize: Math.round(5 * (800/canvasWidth)),
+        fontFamily: "Impact, Charcoal, sans-serif",
         rotateRatio: 0.5,
         rotationSteps: 2,
         backgroundColor: bgColor,
@@ -20,6 +22,11 @@ function GenerateConfig (currentList) {
             return Math.pow(size, 2.3) * canvasWidth / 1024;
         },
     }
+
+    for (const key in params) {
+        returnConfig[key] = params[key]
+    }
+    return returnConfig
 }
 
 export default GenerateConfig;

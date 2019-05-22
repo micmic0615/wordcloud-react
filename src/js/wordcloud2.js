@@ -733,7 +733,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
     var fontSize = info.fontSize;
     var color;
     if (getTextColor) {
-      color = getTextColor(text, weight, fontSize, distance, theta);
+      color = getTextColor(text, weight, fontSize, distance/maxRadius, theta, info);
     } else {
       color = settings.color;
     }
@@ -791,6 +791,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
             window.PING.push({
               x: translateX,
               y: translateY,
+              size: Math.max(info.gw, info.gh),
               lifespan: 1,
               text,
             })
@@ -999,6 +1000,10 @@ var WordCloud = function WordCloud(elements, options, listener) {
       drawText(gx, gy, info, textInfo, text, weight,(maxRadius - r), gxy[2], rotateDeg, attributes);
 
       // Mark the spaces on the grid as filled
+      if (text === "PLAIN"){
+        console.log(info)
+      }
+      
       updateGrid(gx, gy, gw, gh, info, item);
 
       // Return true so some() will stop and also return true.
@@ -1240,8 +1245,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
 
       var drawn = putWord(putWordParam);
       if (drawn){renderedWords.push(putWordParam.item)}
-      var canceled = !sendEvent('wordclouddrawn', true, {
-        item: settings.list[i], drawn: drawn, max: settings.list.length });
+      var canceled = !sendEvent('wordclouddrawn', true, {item: settings.list[i], drawn: drawn, index:i, max: settings.list.length });
       if (exceedTime() || canceled) {
         stoppingFunction(timer);
         settings.abort();

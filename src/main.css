@@ -17,7 +17,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffe0e0;
+    background-color: #eee;
 }
 
 .container {
@@ -47,8 +47,36 @@ body {
     float: left;
 }
 
+.form-meter {
+    width: 100%;
+    height: 50px;
+    margin: 0px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.form-ratio {
+    width: 100%;
+    height: 100%;
+    background-color: #f00;
+    position: absolute;
+    left: 0%;
+}
+
+.form-ratio-text {
+    z-index: 10;
+    font-size: 20px;
+}
+
 .form-input, .form-button {
     width: 100%;
     margin: 0px;
     height: 30px;
+    border: 1px solid #aaa;
+    text-align: center
 }

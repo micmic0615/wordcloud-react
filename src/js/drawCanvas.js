@@ -1,11 +1,11 @@
 import WordCloud from 'Src/js/wordcloud2';
-import GenerateConfig from 'Src/js/generateConfig';
+
 import ReadMask from 'Src/js/readMask';
 import axios from 'axios';
 
 const drawQueue = [];
 
-function drawCanvas(customList) {
+function drawCanvas(runConfig) {
     if (this.renderReady){
         this.renderReady = false;
         var divContainer = document.querySelector(".container");
@@ -14,7 +14,6 @@ function drawCanvas(customList) {
         var divHtmlCanvas = document.querySelector("#html-canvas");
 
         const run = () => {
-            var runConfig = GenerateConfig.bind(this)(customList);
         
             // devicePixelRatio
             var devicePixelRatio = parseFloat(1);
@@ -130,13 +129,20 @@ function drawCanvas(customList) {
                     // console.log(renderedWords)
                     var pngUrl = divCanvas.toDataURL(); 
                     divImgCanvas.src = String(pngUrl);
+
                     divCanvas.style.opacity = 0;
+                    
                     this.renderReady = true;
 
                     if (drawQueue.length){
-                        let queuedList = [...drawQueue[0]];
+                        let queuedList = {...drawQueue[0]};
                         drawQueue.shift()
                         drawCanvas.bind(this)(queuedList);
+                    }
+                },
+                "wordclouddrawn": async (drawParam) => {
+                    if (runConfig.fade){
+                        divCanvas.style.opacity = drawParam.index / drawParam.max;
                     }
                 }
             });
@@ -144,7 +150,7 @@ function drawCanvas(customList) {
 
         ReadMask.bind(this)(() => {run()});
     } else {
-        drawQueue.push(customList)
+        drawQueue.push(runConfig)
     }
 }
 
