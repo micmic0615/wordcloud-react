@@ -1000,10 +1000,6 @@ var WordCloud = function WordCloud(elements, options, listener) {
       drawText(gx, gy, info, textInfo, text, weight,(maxRadius - r), gxy[2], rotateDeg, attributes);
 
       // Mark the spaces on the grid as filled
-      if (text === "PLAIN"){
-        console.log(info)
-      }
-      
       updateGrid(gx, gy, gw, gh, info, item);
 
       // Return true so some() will stop and also return true.
