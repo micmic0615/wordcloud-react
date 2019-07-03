@@ -1,3 +1,5 @@
+import settings from 'Src/settings';
+
 function GenerateConfig (params = {}) {
     var canvasWidth = document.querySelector("#canvas").offsetWidth;
     var bgColor = window.getComputedStyle(document.querySelector('.wrapper'), null).getPropertyValue("background-color");
@@ -19,41 +21,7 @@ function GenerateConfig (params = {}) {
                 i++
             }
             
-            var pool = [ 
-                'Avenir-MediumOblique',
-                'Gotham-Light',
-                'BigCaslon-Medium',
-                'ArialNarrow-Italic',
-                'Avenir-Black',
-                'Avenir-Light',
-                'Avenir-Oblique',
-                'ArialNarrow-BoldItalic',
-                'ArialNarrow',
-                'Avenir-HeavyOblique',
-                'Avenir-Roman',
-                'Gotham-Book',
-                'Gotham-Bold',
-                'Gotham-XLight',
-                'Avenir-Heavy',
-                'Avenir-BookOblique',
-                'Gotham-UltraItalic',
-                'Avenir-LightOblique',
-                'Arial-Black',
-                'ArialNarrow-Bold',
-                'Avenir-BlackOblique',
-                'Gotham-XLightItalic',
-                'BigCaslon',
-                'Arial Narrow Bold',
-                'Gotham-BookItalic',
-                'Gotham-ThinItalic',
-                'Avenir-Medium',
-                'Gotham-Thin',
-                'Arial Narrow Italic',
-                'Gotham-Black',
-                'Aero',
-                'Avenir-Book' 
-            ];
-
+            var pool = [...settings.wordcloud_fonts];
             var rand = pool[wordScore % pool.length];
             return rand; 
         },
@@ -63,8 +31,9 @@ function GenerateConfig (params = {}) {
 
         color: (word, weight) => {
             const negative = () => {
-                var shade = Math.random()*50 + 40;
-                return `rgba(${shade}, ${shade},${shade},1)`;
+                var pool = [...settings.negative_colors];
+                var rand = pool[Math.floor(Math.random() * pool.length)];
+                return rand;
             }
 
             return negative();

@@ -8,7 +8,10 @@ const drawQueue = [];
 function drawCanvas(runConfig) {
     if (this.renderReady){
         if (this.changes.length && this.updateName){
-            this.updateName(this.changes[0])
+            this.updateName(null);
+            setTimeout(()=>{
+                this.updateName(this.changes[0])
+            }, 1000)
         }
         
         this.renderReady = false;

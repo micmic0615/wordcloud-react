@@ -9,7 +9,7 @@ class Form extends Component {
         super(props);
         this.state = {
             word: "",
-            ratio: 20,
+            ratio: settings.default_ratio,
             placeholder: "flex",
             name: "",
             scale: 1,
@@ -163,7 +163,7 @@ class Form extends Component {
                     {this.state.submitted ? <div className="green-button" onClick={this.nextName}>NEXT NAME</div> : <div className="green-button" onClick={this.pledgeClick}>PLEDGE</div>}
                     
 
-                    <img src="/images/logo.png" className="pledge-logo"></img>
+                    <img src="/images/logo.svg" className="pledge-logo"></img>
 
                     <div className="pledge-footer">Copyright © 2019 MSD Pharma (Singapore) Pte. Ltd., a subsidiary of Merck & Co., Inc., Kenilworth, NJ, USA. All rights reserved. SG-KEY-00076 06/19</div>
                 </div>

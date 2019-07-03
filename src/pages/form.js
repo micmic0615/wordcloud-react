@@ -9,7 +9,7 @@ class Form extends Component {
         super(props);
         this.state = {
             word: "",
-            ratio: 25
+            ratio: settings.default_ratio
         };
     }
 

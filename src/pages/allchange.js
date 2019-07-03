@@ -64,34 +64,8 @@ class Index extends Component {
                         shuffle: true,
                         color: (word, weight, fontSize, distance, theta, info) => {
                             const positive = () => {
-                                var pool = [
-                                    /*MSD Teal:*/ "#00877C",
-                                    /*MSD Light Teal:*/ "#6ECEB2",
-                                    /*Warm Gray:*/ "#BFB8AF",
-                                    /*MSD Teal:*/ "#00877C",
-                                    /*MSD Light Teal:*/ "#6ECEB2",
-                                    /*ACCENT GREEN:*/ "#9AC92E",
-                                    /*Purple:*/ "#662046",
-                                    /*ACCENT GREEN:*/ "#9AC92E",
-                                    /*ACCENT ORANGE:*/ "#F68D2E",
-                                    /*ACCENT ORANGE:*/ "#F68D2E",
-                                    /*ACCENT ORANGE:*/ "#F68D2E",
-
-                                    /*MSD Teal:*/ "#00877C",
-                                    /*MSD Light Teal:*/ "#6ECEB2",
-                                    /*Warm Gray:*/ "#BFB8AF", /* #959089 #605c57 #363432 */ 
-                                    /*MSD Teal:*/ "#00877C",
-                                    /*MSD Light Teal:*/ "#6ECEB2",
-                                    /*ACCENT GREEN:*/ "#9AC92E",
-                                    /*Purple:*/ "#662046",
-                                    /*ACCENT GREEN:*/ "#9AC92E",
-
-
-                                ]
-                
+                                var pool = [...settings.positive_colors];
                                 var rand = pool[Math.floor(Math.random() * pool.length)];
-
-                                let emphasis = "#009994"
                 
                                 return rand;
                             }
@@ -112,23 +86,30 @@ class Index extends Component {
 
     render() {
         return (<div className="outer">
-            <div className="wrapper">
-                <img src="/images/logo.png" className="logo"></img>
+            <div className="wrapper" style={{...settings.style_wrapper}}>
+                <img src="/images/logo.svg" className="logo"></img>
                  
                 <div className="menu-container">
-                    <div className="hashtag">#ICANWEWILL</div>
-                    <div className="title">COMBAT CANCER</div>
+                    <div className="hashtag" style={{...settings.style_hashtag}}>#ICANWEWILL</div>
+                    <div className="title" style={{...settings.style_title}}>COMBAT CANCER</div>
                     
                         {(() => {
-                            if (this.state.nameChange != ""){
-                                return <div className="details">
+                            if (this.state.nameChange === null){
+                                return <div className="details"  style={{...settings.style_details}}>
+                                <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
+                                <div className="details_init hide">Every effort counts in the fight to eliminate cancer. <br></br>
+                                Enter your name to join in, then share your photos <br></br>
+                                to spread the word!</div>
+                            </div>
+                            } else if (this.state.nameChange != ""){
+                                return <div className="details"  style={{...settings.style_details}}>
                                     <div className="details_name ">I, {this.state.nameChange}, pledge to join the fight.</div>
                                     <div className="details_init hide">Every effort counts in the fight to eliminate cancer. <br></br>
                                     Enter your name to join in, then share your photos <br></br>
                                     to spread the word!</div>
                                 </div>
                             } else {
-                                return <div className="details">
+                                return <div className="details"  style={{...settings.style_details}}>
                                     <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
                                     <div className="details_init ">Every effort counts in the fight to eliminate cancer. <br></br>
                                     Enter your name to join in, then share your photos <br></br>
