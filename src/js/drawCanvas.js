@@ -1,5 +1,5 @@
 import WordCloud from 'Src/js/wordcloud2';
-
+import settings from 'Src/settings';
 import ReadMask from 'Src/js/readMask';
 import axios from 'axios';
 
@@ -7,8 +7,12 @@ const drawQueue = [];
 
 function drawCanvas(runConfig) {
     if (this.renderReady){
+        if (this.changes.length && this.updateName){
+            this.updateName(this.changes[0])
+        }
+        
         this.renderReady = false;
-        var divContainer = document.querySelector(".container");
+        var divContainer = document.querySelector(".lungs-container");
         var divCanvas = document.querySelector("#canvas");
         var divImgCanvas = document.querySelector("#img-canvas");
         var divHtmlCanvas = document.querySelector("#html-canvas");
@@ -124,7 +128,7 @@ function drawCanvas(runConfig) {
             WordCloud([divCanvas, divHtmlCanvas], runConfig, {
                 "wordcloudfinish": async (renderedWords)=>{
                     console.log(renderedWords.length, "/" ,runConfig.list.length )
-                    await axios.post('http://107.10.114.154:4000/check-render', {renderedWords});
+                    await axios.post(`http://${settings.ip_address}:${settings.port}/check-render`, {renderedWords});
                     window.HAS_RENDERED = true;
                     // console.log(renderedWords)
                     var pngUrl = divCanvas.toDataURL(); 
@@ -142,7 +146,7 @@ function drawCanvas(runConfig) {
                 },
                 "wordclouddrawn": async (drawParam) => {
                     if (runConfig.fade){
-                        divCanvas.style.opacity = drawParam.index / drawParam.max;
+                        divCanvas.style.opacity = Math.sqrt(Math.sqrt(drawParam.index / drawParam.max));
                     }
                 }
             });

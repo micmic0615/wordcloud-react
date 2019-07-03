@@ -63,7 +63,7 @@ function drawPing() {
     }
 
     if (this.renderReady){
-        var divContainer = document.querySelector(".container");
+        var divContainer = document.querySelector(".lungs-container");
         var divPing = document.querySelector("#ping-canvas");
 
         var width = divContainer.offsetWidth;

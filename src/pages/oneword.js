@@ -4,6 +4,7 @@ import DrawPing from 'Src/js/drawPing';
 import axios from 'axios';
 import isMobile from 'is-mobile';
 import GenerateConfig from 'Src/js/generateConfig';
+import settings from 'Src/settings';
 
 
 class Index extends Component {
@@ -22,18 +23,14 @@ class Index extends Component {
     }
 
     componentDidMount = () => {
-        if(isMobile()){
-            this.props.history.push('/form')
-        } else {
-            window.HAS_RENDERED = false;
-            DrawPing.bind(this)()
-            setTimeout(this.fetch, 500)
-        }
+        window.HAS_RENDERED = false;
+        DrawPing.bind(this)()
+        setTimeout(this.fetch, 500)
     }
 
     fetch = async () => {
         try {
-            const response = await axios.post('http://107.10.114.154:4000/fetch');
+            const response = await axios.post(`http://${settings.ip_address}:${settings.port}/fetch`);
 
             if (!response.data.initialize){
                 if (window.HAS_RENDERED){
@@ -68,7 +65,9 @@ class Index extends Component {
 
     render() {
         return (<div className="wrapper">
-            <div className="container">
+            
+
+            <div className="lungs-container">
                 <img id="img-canvas" src="" className="canvas" alt=""/>
                 <canvas id="canvas" className="canvas" ></canvas>
                 <canvas id="ping-canvas" className="canvas" ></canvas>

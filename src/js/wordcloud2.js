@@ -375,6 +375,11 @@ var WordCloud = function WordCloud(elements, options, listener) {
       break;
   }
 
+  var getFontFamily
+  if (typeof settings.fontFamily === 'function') {
+    getFontFamily = settings.fontFamily;
+  }
+
   /* function for getting the font-weight of the text */
   var getTextFontWeight;
   if (typeof settings.fontWeight === 'function') {
@@ -520,7 +525,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
     }
   };
 
-  var getTextInfo = function getTextInfo(word, weight, rotateDeg) {
+  var getTextInfo = function getTextInfo(word, weight, rotateDeg, index) {
     // calculate the acutal font size
     // fontSize === 0 means weightFactor function wants the text skipped,
     // and size < minSize means we cannot draw the text.
@@ -552,11 +557,18 @@ var WordCloud = function WordCloud(elements, options, listener) {
       fontWeight = settings.fontWeight;
     }
 
+    var fontFamily;
+    if (getFontFamily){
+      fontFamily = getFontFamily(word, weight, fontSize, index)
+    } else {
+      fontFamily = settings.fontFamily;
+    }
+
     var fcanvas = document.createElement('canvas');
     var fctx = fcanvas.getContext('2d', { willReadFrequently: true });
-
+    //MARKMEPO
     fctx.font = fontWeight + ' ' +
-      (fontSize * mu).toString(10) + 'px ' + settings.fontFamily;
+      (fontSize * mu).toString(10) + 'px ' + fontFamily;
 
     // Estimate the dimension of the text with measureText().
     var fw = fctx.measureText(word).width / mu;
@@ -609,7 +621,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
     // Once the width/height is set, ctx info will be reset.
     // Set it again here.
     fctx.font = fontWeight + ' ' +
-      (fontSize * mu).toString(10) + 'px ' + settings.fontFamily;
+      (fontSize * mu).toString(10) + 'px ' + fontFamily;
 
     // Fill the text into the fcanvas.
     // XXX: We cannot because textBaseline = 'top' here because
@@ -624,6 +636,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
 
     // Get the pixels of the text
     var imageData = fctx.getImageData(0, 0, width, height).data;
+   
 
     if (exceedTime()) {
       return false;
@@ -728,14 +741,21 @@ var WordCloud = function WordCloud(elements, options, listener) {
   };
 
   /* Actually draw the text on the grid */
-  var drawText = function drawText(gx, gy, info, textInfo, text, weight, distance, theta, rotateDeg, attributes) {
+  var drawText = function drawText(gx, gy, info, textInfo, text, weight, distance, theta, rotateDeg, attributes, index) {
 
     var fontSize = info.fontSize;
-    var color;
+    var color; //MARKMEPO
     if (getTextColor) {
       color = getTextColor(text, weight, fontSize, distance/maxRadius, theta, info);
     } else {
       color = settings.color;
+    }
+
+    var fontFamily;
+    if (getFontFamily){
+      fontFamily = getFontFamily(text, weight, fontSize, index);
+    } else {
+      fontFamily = settings.fontFamily;
     }
 
     // get fontWeight that will be used to set ctx.font and font style rule
@@ -770,9 +790,8 @@ var WordCloud = function WordCloud(elements, options, listener) {
         } else {
           ctx.scale(scaleX / mu, 1 / mu);
         }
-        
 
-        ctx.font = fontWeight + ' ' + (fontSize * mu).toString(10) + 'px ' + settings.fontFamily;
+        ctx.font = fontWeight + ' ' + (fontSize * mu).toString(10) + 'px ' + fontFamily;
         ctx.fillStyle = color;
 
         // Translate the canvas position to the origin coordinate of where
@@ -941,6 +960,8 @@ var WordCloud = function WordCloud(elements, options, listener) {
     var {index, item, frame} = params;
     var word, text, weight, attributes;
 
+    
+
     var raw = frame || item;
 
     if (Array.isArray(raw)) {
@@ -957,8 +978,9 @@ var WordCloud = function WordCloud(elements, options, listener) {
     var rotateDeg = getRotateDeg(index);
 
     // get info needed to put the text onto the canvas
-    var info = getTextInfo(word, weight, rotateDeg);
-    var textInfo = getTextInfo(text, weight, rotateDeg);
+    var info = getTextInfo(word, weight, rotateDeg, index);
+    var textInfo = getTextInfo(text, weight, rotateDeg, index);
+
 
     // not getting the info means we shouldn't be drawing this one.
     if (!info) {
@@ -997,7 +1019,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
       }
 
       // Actually put the text on the canvas
-      drawText(gx, gy, info, textInfo, text, weight,(maxRadius - r), gxy[2], rotateDeg, attributes);
+      drawText(gx, gy, info, textInfo, text, weight,(maxRadius - r), gxy[2], rotateDeg, attributes, index);
 
       // Mark the spaces on the grid as filled
       updateGrid(gx, gy, gw, gh, info, item);
@@ -1033,6 +1055,7 @@ var WordCloud = function WordCloud(elements, options, listener) {
       if the previous one is canceled (for cancelable events). */
   var sendEvent = function sendEvent(type, cancelable, details) {
     if (listener[type]){
+      
       listener[type](details)
     }
     if (cancelable) {

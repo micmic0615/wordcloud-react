@@ -5,22 +5,16 @@ import isMobile from 'is-mobile';
 
 class Index extends Component {
   
-    componentDidMount = () => {
-        if(isMobile()){
-            this.props.history.push('/form')
-        } else {
-            
-        }
-    }
-
+   
 
     render() {
         return (<div className="form">
             <div className="form-box">
                 <ul>
-                    <li><Link to="/oneword">Oneword</Link></li>
-                    <li><Link to="/allchange">Allchange</Link></li>
-                    <li><Link to="/form">Form</Link></li>
+                    {/* <li><Link to="/oneword">Oneword</Link></li> */}
+                    <li><Link to="/allchange">Wall</Link></li>
+                    <li><Link to="/pledge">Submit</Link></li>
+                    <li><Link to="/form">Admin</Link></li>
                 </ul>
             </div>
         </div>)

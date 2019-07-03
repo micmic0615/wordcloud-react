@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import settings from 'Src/settings';
 
 class Form extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Form extends Component {
     submit = async () => {
         try {
             let { word, ratio } = this.state;
-            await axios.post('http://107.10.114.154:4000/update', {word, ratio});
+            await axios.post(`http://${settings.ip_address}:${settings.port}/update`, {word, ratio});
             this.setState({word: ""}, this.keyboardRef.keyboard.clearInput)
         } catch (error) {
             console.error(error);
@@ -28,7 +29,7 @@ class Form extends Component {
 
     reset = async () => {
         try {
-            await axios.post('http://107.10.114.154:4000/reset');
+            await axios.post(`http://${settings.ip_address}:${settings.port}/reset`);
             this.setState({word: ""}, this.keyboardRef.keyboard.clearInput)
         } catch (error) {
             console.error(error);
