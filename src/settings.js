@@ -1,7 +1,7 @@
 export default {
     // mac 107.10.114.154
     // windows 192.168.2.18
-    ip_address: "192.168.2.18",
+    ip_address: "localhost",
     port: 4000,
     default_ratio: 20,
 
@@ -10,29 +10,28 @@ export default {
     },
 
     style_title: {
-        fontSize: "64px"
+        fontSize: "74px",
+        fontWeight: 900
     },
     style_hashtag: {
-        fontSize: "32px"
+        fontSize: "42px"
     },
 
     style_details: {
-        fontSize: "18px"
+        fontSize: "32px",
+        fontWeight: 900
     },
 
     negative_colors: [
-        "#282828",
-        "#323232",
-        "#3c3c3c",
-        "#464646",
-        "#505050",
-        "#5a5a5a",
+        "#111",
+        "#222",
+        "#333",
     ],
 
     positive_colors: [
         /*MSD Teal:*/ "#00877C",
         /*MSD Light Teal:*/ "#6ECEB2",
-        /*Warm Gray:*/ "#BFB8AF",
+        /*Warm Gray:*/ "#363432",
         /*MSD Teal:*/ "#00877C",
         /*MSD Light Teal:*/ "#6ECEB2",
         /*ACCENT GREEN:*/ "#9AC92E",
@@ -44,7 +43,7 @@ export default {
 
         /*MSD Teal:*/ "#00877C",
         /*MSD Light Teal:*/ "#6ECEB2",
-        /*Warm Gray:*/ "#BFB8AF", /* #959089 #605c57 #363432 */ 
+        /*Warm Gray:*/ "#363432", /* #959089 #605c57 #363432 */ 
         /*MSD Teal:*/ "#00877C",
         /*MSD Light Teal:*/ "#6ECEB2",
         /*ACCENT GREEN:*/ "#9AC92E",
@@ -53,37 +52,37 @@ export default {
     ],
 
     wordcloud_fonts:  [ 
-        'Avenir-MediumOblique',
-        'Gotham-Light',
-        'BigCaslon-Medium',
-        'ArialNarrow-Italic',
+        // 'Avenir-MediumOblique',
+        // 'Gotham-Light',
+        // 'BigCaslon-Medium',
+        // 'ArialNarrow-Italic',
         'Avenir-Black',
-        'Avenir-Light',
-        'Avenir-Oblique',
+        // 'Avenir-Light',
+        // 'Avenir-Oblique',
         'ArialNarrow-BoldItalic',
-        'ArialNarrow',
+        // 'ArialNarrow',
         'Avenir-HeavyOblique',
-        'Avenir-Roman',
-        'Gotham-Book',
+        // 'Avenir-Roman',
+        // 'Gotham-Book',
         'Gotham-Bold',
-        'Gotham-XLight',
+        // 'Gotham-XLight',
         'Avenir-Heavy',
-        'Avenir-BookOblique',
-        'Gotham-UltraItalic',
-        'Avenir-LightOblique',
+        // 'Avenir-BookOblique',
+        // 'Gotham-UltraItalic',
+        // 'Avenir-LightOblique',
         'Arial-Black',
         'ArialNarrow-Bold',
-        'Avenir-BlackOblique',
-        'Gotham-XLightItalic',
-        'BigCaslon',
+        // 'Avenir-BlackOblique',
+        // 'Gotham-XLightItalic',
+        // 'BigCaslon',
         'Arial Narrow Bold',
-        'Gotham-BookItalic',
-        'Gotham-ThinItalic',
-        'Avenir-Medium',
-        'Gotham-Thin',
-        'Arial Narrow Italic',
+        // 'Gotham-BookItalic',
+        // 'Gotham-ThinItalic',
+        // 'Avenir-Medium',
+        // 'Gotham-Thin',
+        // 'Arial Narrow Italic',
         'Gotham-Black',
-        'Aero',
-        'Avenir-Book' 
+        // 'Aero',
+        // 'Avenir-Book' 
     ]
 }

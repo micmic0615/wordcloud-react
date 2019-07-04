@@ -11,7 +11,7 @@ function GenerateConfig (params = {}) {
         fade: 0,
 
         shuffle: 0,
-        gridSize: 6,
+        gridSize: 7,
         // drawMask: true,
         fontFamily: (word, weight, fontSize, index) => {
             var wordScore = index;

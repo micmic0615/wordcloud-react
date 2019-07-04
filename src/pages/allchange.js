@@ -87,7 +87,7 @@ class Index extends Component {
     render() {
         return (<div className="outer">
             <div className="wrapper" style={{...settings.style_wrapper}}>
-                <img src="/images/logo.svg" className="logo"></img>
+                <img src="/images/logo-fixed.png" className="logo"></img>
                  
                 <div className="menu-container">
                     <div className="hashtag" style={{...settings.style_hashtag}}>#ICANWEWILL</div>
@@ -97,23 +97,23 @@ class Index extends Component {
                             if (this.state.nameChange === null){
                                 return <div className="details"  style={{...settings.style_details}}>
                                 <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
-                                <div className="details_init hide">Every effort counts in the fight to eliminate cancer. <br></br>
-                                Enter your name to join in, then share your photos <br></br>
+                                <div className="details_init hide">Every effort counts in the fight to <br/>    eliminate cancer. 
+                                Enter your  <br/>name to join in, then share your  <br/> photos 
                                 to spread the word!</div>
                             </div>
                             } else if (this.state.nameChange != ""){
                                 return <div className="details"  style={{...settings.style_details}}>
                                     <div className="details_name ">I, {this.state.nameChange}, pledge to join the fight.</div>
-                                    <div className="details_init hide">Every effort counts in the fight to eliminate cancer. <br></br>
-                                    Enter your name to join in, then share your photos <br></br>
-                                    to spread the word!</div>
+                                    <div className="details_init hide">Every effort counts in the fight to <br/>    eliminate cancer. 
+                                Enter your  <br/>name to join in, then share your  <br/> photos 
+                                to spread the word!</div>
                                 </div>
                             } else {
                                 return <div className="details"  style={{...settings.style_details}}>
                                     <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
-                                    <div className="details_init ">Every effort counts in the fight to eliminate cancer. <br></br>
-                                    Enter your name to join in, then share your photos <br></br>
-                                    to spread the word!</div>
+                                    <div className="details_init ">Every effort counts in the fight to <br/>    eliminate cancer. 
+                                Enter your  <br/>name to join in, then share your  <br/> photos 
+                                to spread the word!</div>
                                 </div>
                             }
                         })()}
@@ -127,7 +127,7 @@ class Index extends Component {
                     <div id="html-canvas" className="canvas hide"></div>
                 </div>
 
-                <div className="copyright">Copyright © 2019 MSD Pharma (Singapore) Pte. Ltd., a subsidiary of Merck & Co., Inc., Kenilworth, NJ, USA. All rights reserved. SG-KEY-00075 06/19 </div>
+                <div className="copyright" >Copyright © 2019 MSD Pharma (Singapore) Pte. Ltd., a subsidiary of Merck & Co., Inc., <br/> Kenilworth, NJ, USA. All rights reserved. SG-KEY-00075 06/19 </div>
             </div>
         </div>)
     }
