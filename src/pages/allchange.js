@@ -64,7 +64,9 @@ class Index extends Component {
                         shuffle: true,
                         color: (word, weight, fontSize, distance, theta, info) => {
                             const positive = () => {
-                                var pool = [...settings.positive_colors];
+                                let color_settings = JSON.stringify([...this.replaceList].sort()) == JSON.stringify([...this.baseList].sort()) ? settings.negative_colors : settings.positive_colors;
+
+                                var pool = [...color_settings];
                                 var rand = pool[Math.floor(Math.random() * pool.length)];
                 
                                 return rand;

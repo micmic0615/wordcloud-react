@@ -1,7 +1,8 @@
 export default {
     // mac 107.10.114.154
     // windows 192.168.2.18
-    ip_address: "localhost",
+    // hotspot 192.168.137.1
+    ip_address: "192.168.137.1",
     port: 4000,
     default_ratio: 20,
 

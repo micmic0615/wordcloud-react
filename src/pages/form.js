@@ -9,12 +9,30 @@ class Form extends Component {
         super(props);
         this.state = {
             word: "",
-            ratio: settings.default_ratio
+            ratio: settings.default_ratio,
+            persist: false,
         };
     }
 
     componentDidMount = () => {
         // document.body.requestFullscreen()
+
+        this.autoPing();
+    }
+
+    autoPing = async () => {
+        if (this.state.persist){
+            try {
+                let word = String(Math.ceil(Math.random()*9999999));
+                let ratio = 20;
+                await axios.post(`http://${settings.ip_address}:${settings.port}/update`, {word, ratio});
+                
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        setTimeout(()=>{this.autoPing()}, 5000)
     }
 
     submit = async () => {
@@ -146,6 +164,8 @@ class Form extends Component {
                         "{less}": "% DOWN"
                     }}
                 />
+
+                <button onClick={()=>{this.setState({persist: !this.state.persist})}}>{this.state.persist ? "STOP AUTOPING" : "START AUTOPING"}</button>
                 {/* <button className="form-button" onClick={this.submit}>SUBMIT</button> */}
 
                 {/* <button className="form-button" onClick={this.reset} style={{marginTop:"60px"}}>RESET</button> */}
