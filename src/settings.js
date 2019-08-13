@@ -11,15 +11,15 @@ export default {
     },
 
     style_title: {
-        fontSize: "74px",
+        fontSize: "50px",
         fontWeight: 900
     },
     style_hashtag: {
-        fontSize: "42px"
+        fontSize: "22px"
     },
 
     style_details: {
-        fontSize: "32px",
+        fontSize: "17px",
         fontWeight: 900
     },
 
@@ -52,38 +52,73 @@ export default {
         /*ACCENT GREEN:*/ "#9AC92E",
     ],
 
+    // wordcloud_fonts:  [ 
+    //     'Avenir-MediumOblique',
+    //     'Gotham-Light',
+    //     'BigCaslon-Medium',
+    //     'ArialNarrow-Italic',
+    //     'Avenir-Black',
+    //     'Avenir-Light',
+    //     'Avenir-Oblique',
+    //     'ArialNarrow-BoldItalic',
+    //     'ArialNarrow',
+    //     'Avenir-HeavyOblique',
+    //     'Avenir-Roman',
+    //     'Gotham-Book',
+    //     'Gotham-Bold',
+    //     'Gotham-XLight',
+    //     'Avenir-Heavy',
+    //     'Avenir-BookOblique',
+    //     'Gotham-UltraItalic',
+    //     'Avenir-LightOblique',
+    //     'Arial-Black',
+    //     'ArialNarrow-Bold',
+    //     'Avenir-BlackOblique',
+    //     'Gotham-XLightItalic',
+    //     'BigCaslon',
+    //     'Arial Narrow Bold',
+    //     'Gotham-BookItalic',
+    //     'Gotham-ThinItalic',
+    //     'Avenir-Medium',
+    //     'Gotham-Thin',
+    //     'Arial Narrow Italic',
+    //     'Gotham-Black',
+    //     'Aero',
+    //     'Avenir-Book' 
+    // ]
+
     wordcloud_fonts:  [ 
-        // 'Avenir-MediumOblique',
+        'Avenir-MediumOblique',
         // 'Gotham-Light',
-        // 'BigCaslon-Medium',
+        'BigCaslon-Medium',
         // 'ArialNarrow-Italic',
         'Avenir-Black',
         // 'Avenir-Light',
-        // 'Avenir-Oblique',
+        'Avenir-Oblique',
         'ArialNarrow-BoldItalic',
         // 'ArialNarrow',
         'Avenir-HeavyOblique',
-        // 'Avenir-Roman',
-        // 'Gotham-Book',
+        'Avenir-Roman',
+        'Gotham-Book',
         'Gotham-Bold',
         // 'Gotham-XLight',
         'Avenir-Heavy',
-        // 'Avenir-BookOblique',
-        // 'Gotham-UltraItalic',
+        'Avenir-BookOblique',
+        'Gotham-UltraItalic',
         // 'Avenir-LightOblique',
         'Arial-Black',
         'ArialNarrow-Bold',
-        // 'Avenir-BlackOblique',
+        'Avenir-BlackOblique',
         // 'Gotham-XLightItalic',
-        // 'BigCaslon',
+        'BigCaslon',
         'Arial Narrow Bold',
-        // 'Gotham-BookItalic',
+        'Gotham-BookItalic',
         // 'Gotham-ThinItalic',
-        // 'Avenir-Medium',
+        'Avenir-Medium',
         // 'Gotham-Thin',
-        // 'Arial Narrow Italic',
+        'Arial Narrow Italic',
         'Gotham-Black',
-        // 'Aero',
-        // 'Avenir-Book' 
+        'Aero',
+        'Avenir-Book' 
     ]
 }

@@ -1,4 +1,4 @@
-import MaskBase64 from 'Src/js/maskBase64';
+import MaskBase64 from 'Src/js/maskBase64-old';
 
 function readMask(callback){
     this.maskCanvas = null;

@@ -7,12 +7,20 @@ const drawQueue = [];
 
 function drawCanvas(runConfig) {
     if (this.renderReady){
-        if (this.changes.length && this.updateName){
-            this.updateName(null);
-            setTimeout(()=>{
-                this.updateName(this.changes[0])
-            }, 1000)
+        if (this.updateName){
+            if (this.changes.length){
+                this.updateName(null);
+                setTimeout(()=>{
+                    this.updateName(this.changes[0])
+                }, 1000)
+            } else {
+                this.updateName(null);
+                setTimeout(()=>{
+                    this.updateName("")
+                }, 1000)
+            }
         }
+       
         
         this.renderReady = false;
         var divContainer = document.querySelector(".lungs-container");

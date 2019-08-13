@@ -5,6 +5,7 @@ import isMobile from 'is-mobile';
 import settings from 'Src/settings';
 import GenerateConfig from 'Src/js/generateConfig';
 
+
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -17,11 +18,14 @@ class Index extends Component {
         this.replaceList = null;
         this.changes = [];
 
+        this.tempName = "";
+
         // this.runningList = [...this.baseList];
         // this.runningListIndex = 0;
     }
 
     updateName = (name) => {
+        if (name === null){this.tempName = this.state.nameChange}
         this.setState({nameChange: name})
     }
 
@@ -86,6 +90,20 @@ class Index extends Component {
         }
     }
 
+    capitalizeFirst = (word) => {
+        let returnWord = ""
+        if (word){
+            let wordArray = word.split(" ").map((item)=>{
+                return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+            });
+
+            returnWord = wordArray.join(" ")
+        }
+        
+        
+        return returnWord
+    }
+
     render() {
         return (<div className="outer">
             <div className="wrapper" style={{...settings.style_wrapper}}>
@@ -98,21 +116,21 @@ class Index extends Component {
                         {(() => {
                             if (this.state.nameChange === null){
                                 return <div className="details"  style={{...settings.style_details}}>
-                                <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
+                                <div className="details_name hide">I, {this.capitalizeFirst(this.tempName)}, pledge to join the fight.</div>
                                 <div className="details_init hide">Every effort counts in the fight to <br/>    eliminate cancer. 
                                 Enter your  <br/>name to join in, then share your  <br/> photos 
                                 to spread the word!</div>
                             </div>
                             } else if (this.state.nameChange != ""){
                                 return <div className="details"  style={{...settings.style_details}}>
-                                    <div className="details_name ">I, {this.state.nameChange}, pledge to join the fight.</div>
+                                    <div className="details_name ">I, {this.capitalizeFirst(this.state.nameChange)}, pledge to join the fight.</div>
                                     <div className="details_init hide">Every effort counts in the fight to <br/>    eliminate cancer. 
                                 Enter your  <br/>name to join in, then share your  <br/> photos 
                                 to spread the word!</div>
                                 </div>
                             } else {
                                 return <div className="details"  style={{...settings.style_details}}>
-                                    <div className="details_name hide">I, {this.state.nameChange}, pledge to join the fight.</div>
+                                    <div className="details_name hide">I, {this.capitalizeFirst(this.state.nameChange)}, pledge to join the fight.</div>
                                     <div className="details_init ">Every effort counts in the fight to <br/>    eliminate cancer. 
                                 Enter your  <br/>name to join in, then share your  <br/> photos 
                                 to spread the word!</div>

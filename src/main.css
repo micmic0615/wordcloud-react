@@ -43,27 +43,29 @@ body {
 
 .logo {
     position: absolute;
-    left: 120px; 
-    top: 60px;
-    width: 720px;
+    left: 20px;
+    top: 20px;
+    width: 300px;
     z-index: 999;
 }
 
 .copyright {
     position: absolute;
-    bottom: 8s0px;
+    bottom: 20px;
     width: 100%;
     color: #000;
-    font-size: 12px;
-    left: 120px;
+    font-size: 14px;
+    left: 20px;
 }
 
 .menu-container {
     flex-grow: 1;
     min-height: 100px;
+    min-width: 420px;
+    margin-left: 20px;
     position: relative;
     text-align: center;
-    transform: scale(1.15);
+    transform: scale(1);
     left: 00px;
     z-index: 999
 }
@@ -113,7 +115,7 @@ body {
     overflow-x: auto;
     overflow-y: visible;
     position: relative;
-    left: -120px;
+    left: 0;
 }
 
 .canvas {
@@ -181,8 +183,18 @@ body {
 }
 
 .pledge .menu-container {
+    float: left;
     flex-grow: unset;
+    width: 100%;
+    transform: scale(1);
 }
+
+.pledge-image-holder {
+    width: 100%;
+    display: inline-block;
+    float: left;
+}
+
 .pledge-img {
     width: calc(100% - 80px);
     max-width: 500px;
@@ -193,6 +205,10 @@ body {
     width: 520px;
     margin: 20px auto;
     position: relative;
+}
+input[type="text"] {
+    -webkit-appearance: none;
+    border-radius: 0;
 }
 .input-text input {
     width: 100%;

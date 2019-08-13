@@ -3,6 +3,7 @@ import axios from 'axios';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import settings from 'Src/settings';
+import BannedWords from 'Src/js/bannedWords';
 
 class Form extends Component {
     constructor(props) {
@@ -114,14 +115,18 @@ class Form extends Component {
 
     pledgeClick = () => {
         if (this.state.name.length >= 3 && this.state.name.length <= 12){
-            this.setState({submitted: true, canSubmit: false}, async () => {
-                try {
-                    await axios.post(`http://${settings.ip_address}:${settings.port}/update`, {word: this.state.name, ratio: 25});
-                    this.setState({canSubmit: true})
-                } catch (error) {
-                    
-                }
-            })
+            if (!BannedWords.includes(String(String(this.state.name.split(" ").join("")).toLowerCase()))){
+                this.setState({submitted: true, canSubmit: false}, async () => {
+                    try {
+                        await axios.post(`http://${settings.ip_address}:${settings.port}/update`, {word: this.state.name, ratio: 20});
+                        this.setState({canSubmit: true})
+                    } catch (error) {
+                        window.location.reload();
+                    }
+                })
+            } else {
+                this.setState({name: ""})
+            }
         }
     }
 
@@ -131,10 +136,18 @@ class Form extends Component {
         }
     }
 
+    sanitizeText = (word) => {
+        let returnWord = word.replace(/[^a-zA-Z0-9 ]/gi, "");
+        returnWord = returnWord.slice(0,12);
+        return returnWord
+    }
+
     render() {
         return (<div className="pledge">
             <div id="pledge-container" style={{transform: `scale(${this.state.scale})`}} >
+                <div className="pledge-image-holder">
                 <img src="/images/pledge.jpg" className="pledge-img"></img>
+                </div>
 
                 <div className="menu-container">
                     <div className="hashtag">#ICANWEWILL</div>
@@ -147,10 +160,10 @@ class Form extends Component {
                         <div className="input-text">
                             <input 
                                 type="text"
-                                value={this.state.name}
+                                value={String(this.state.name)}
                                 onFocus={() => {this.setState({placeholder:  this.state.name == "" ? "flex" : "none"})}}
                                 onBlur={() => {this.setState({placeholder: this.state.name == "" ? "flex" : "none"})}}
-                                onChange={(e) => {this.setState({name: e.target.value, placeholder: e.target.value == "" ? "flex" : "none"})}}
+                                onChange={(e) => {this.setState({name: this.sanitizeText(e.target.value), placeholder: e.target.value == "" ? "flex" : "none"})}}
                             ></input>
                             <div className="placeholder" style={{display: this.state.placeholder}}>
                                 <span >Name</span> 
